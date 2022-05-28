@@ -75,8 +75,8 @@ function set_seconds(){
     if (segundo_int === 59) {
         minuto = document.getElementById('response_location_time_minute').text
         if (minuto) {
-            minuto_int = parseInt(minuto)
-            document.getElementById('response_location_time_minute').innerHTML = minuto_int + 1
+            minuto_int = parseInt(minuto) + 1
+            document.getElementById('response_location_time_minute').innerHTML = (minuto_int.toString().length === 1) ? `0${minuto_int}` : minuto_int;
         }
     }
     document.getElementById('response_location_time_second').innerHTML = (segundo.toString().length === 1) ? `0${segundo}` : segundo;
