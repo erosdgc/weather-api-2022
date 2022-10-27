@@ -1,11 +1,22 @@
-#root {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .container {
-    display: flex;
-    flex-wrap: wrap;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
+.sticky-top {
+  z-index: 100;
+}
+
+  @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
+  .f-dosis {
+    font-family: 'Dosis', sans-serif;
   }
   
   .card {
@@ -30,3 +41,7 @@
 }
 
 .top-buffer { margin-top:20px; }
+
+#city_geolocation {
+  min-height: 50vh;
+}
