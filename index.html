@@ -13,6 +13,7 @@
       crossorigin="anonymous"
     />
     <link href="style/style.css" rel="stylesheet" />
+    <link rel="icon" href="" type="icon" />
   </head>
 
   <body class="container-fluid">
@@ -30,7 +31,7 @@
             </div>
             <button
               onclick="getData()"
-              class="btn btn-success border-0 rounded-0 shadow-sm col-lg-2 col-xl-1 px-3"
+              class="btn btn-success border-0 rounded-0 shadow-sm col-md-2 col-xxl-1 px-3"
             >
               Search
             </button>
@@ -42,7 +43,7 @@
           <div id="error_div" class="error"></div>
         </div>
       </div>
-      <div class="container mt-5 justify-content-center">
+      <div class="container border mt-5 justify-content-center p-0 d-lg-flex">
         <dl class="col-12 col-md-6 gap-3">
           <dt class="col-sm-5 lead fs-3 p-0">Hora local:</dt>
           <dd
@@ -60,9 +61,9 @@
             id="response_location_name"
           ></dd>
 
-          <dt class="col-6 col-sm-5 lead fs-3 p-0">Region:</dt>
+          <dt class="col-6 lead fs-3 p-0">Region:</dt>
           <dd
-            class="col-12 col-sm-7 lead fs-5 border py-4"
+            class="col-12 col-sm-6 lead fs-5 border py-4"
             id="response_location_region"
           ></dd>
 
@@ -105,10 +106,10 @@
             <img id="response_condition_icon" src="" alt="" />
           </dd>
         </dl>
-        <div class="container">
+        <div class="col-12 col-md-6">
           <iframe
             id="city_geolocation"
-            class="col-12 col-md-6"
+            class="col-12 col-md-12"
             frameborder="0"
             scrolling="no"
             marginheight="0"
@@ -119,7 +120,7 @@
       </div>
     </div>
 
-    <footer class="py-5 bg-dark shadow-up">
+    <footer class="py-5 bg-dark shadow-lg">
       <h1 class="text-light text-center">Footer</h1>
     </footer>
   </body>
