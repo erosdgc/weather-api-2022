@@ -4,126 +4,230 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Weather API</title>
+    <title>Weather App Project by Eros David</title>
+    <meta
+      name="description"
+      content="A Weather App made by Eros David. Just write down the city you want to know about and it will show up some climate details and the location on a Google map."
+    />
+    <link rel="icon" type="icon" href="/icons/Globe-Icon-White.svg" />
 
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+
+    <script
+      src="https://kit.fontawesome.com/97f14c85b5.js"
+      crossorigin="anonymous"
+    ></script>
     <link href="style/style.css" rel="stylesheet" />
-    <link rel="icon" href="" type="icon" />
   </head>
 
   <body class="container-fluid">
-    <div>
-      <header class="px-4 px-md-0 py-3 shadow bg-dark sticky-top">
-        <div class="container">
-          <div class="d-flex justify-content-center gap-3">
-            <div class="col-9 col-lg-6 px-0">
-              <input
-                type="text"
-                class="form-control border-0 rounded-0 shadow-sm"
-                id="city_name"
-                placeholder="Write your city here"
-              />
-            </div>
-            <button
-              onclick="getData()"
-              class="btn btn-success border-0 rounded-0 shadow-sm col-md-2 col-xxl-1 px-3"
-            >
-              Search
-            </button>
+    <header class="px-4 px-lg-0 py-4 py-md-3 shadow bg-dark sticky-top">
+      <div class="container py-2">
+        <div class="d-flex justify-content-center gap-3">
+          <img
+            src="/icons/Globe-Icon-White.svg"
+            class="nav-icon col-1"
+            alt="A minimalist global icon"
+          />
+          <div class="col-8 col-lg-6 px-0">
+            <input
+              type="text"
+              class="form-control border-0 rounded-0 shadow-sm text-capitalize"
+              id="city_name"
+              placeholder="Write your city here"
+            />
           </div>
-        </div>
-      </header>
-      <div class="row w-100 text-center">
-        <div class="col-md-12">
-          <div id="error_div" class="error"></div>
+          <button
+            onclick="getData()"
+            class="btn btn-success border-0 rounded-0 shadow-sm col col-md-2 col-xxl-1 px-sm-3"
+          >
+            Search
+          </button>
         </div>
       </div>
-      <div class="container border mt-5 justify-content-center p-0 d-lg-flex">
-        <dl class="col-12 col-md-6 gap-3">
-          <dt class="col-sm-5 lead fs-3 p-0">Hora local:</dt>
-          <dd
-            class="col-sm-7 lead fs-5 border py-4"
-            id="response_location_time"
+    </header>
+
+    <!-- Error BS modal -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div id="error_div"  class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="error lead text-center"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    <!-- <div class="position-fixed dialog-container bg-blur"> -->
+    <div class="d-flex justify-content-center">
+      <div id="error_div" class="error display-6 dialog mt-3"></div>
+    </div>
+    <!-- </div> -->
+
+    <img
+      class="background-img"
+      src="https://res.cloudinary.com/drulocuwt/image/upload/v1667403634/weather-api/weather-api-bg-2k_leeh3p.jpg"
+      alt="Mühlviertel, Rural, Fog, Austria, Alta Austria"
+    />
+
+    <div class="container">
+      <div
+        class="card bg-dark text-light border-dark rounded-0 shadow mx-auto p-0"
+      >
+        <div class="col-12 px-4 px-md-5 mx-auto">
+          <h1
+            class="fw-normal display-1 text-center py-4 border-bottom border-success border-4 mb-4"
           >
-            <a id="response_location_time_hour"></a>
-            <a id="response_location_time_minute"></a>
-            <a id="response_location_time_second" class="d-none"></a>
-          </dd>
+            Weather API
+          </h1>
+        </div>
+        <div class="col-12 px-4 px-md-5">
+          <dl class="row">
+            <!-- Columna por debajo de las 2 -->
 
-          <dt class="col-6 col-sm-5 lead fs-3 p-0">Ciudad:</dt>
-          <dd
-            class="col-12 col-sm-7 lead fs-5 border py-4"
-            id="response_location_name"
-          ></dd>
+            <div class="col-12">
+              <dt class="lead fs-3 p-0 mb-1">Climate:</dt>
+              <dd
+                class="lead fs-5 border-bottom border-light p-3 d-flex align-items-center justify-content-center"
+                id="dd_response_condition_text"
+              >
+                <div id="response_condition_text" class="lead fs-4"></div>
+                <img id="response_condition_icon" class="" src="" alt="" />
+              </dd>
+            </div>
 
-          <dt class="col-6 lead fs-3 p-0">Region:</dt>
-          <dd
-            class="col-12 col-sm-6 lead fs-5 border py-4"
-            id="response_location_region"
-          ></dd>
+            <!-- Primera columna de datos -->
 
-          <dt class="col-sm-5 lead fs-3 p-0">Region id:</dt>
-          <dd
-            class="col-sm-7 lead fs-5 border py-4"
-            id="response_location_tz_id"
-          ></dd>
+            <div class="col-12 col-lg-6">
+              <dt class="lead fs-4 p-0 mb-1">Time:</dt>
+              <dd
+                class="lead fs-5 border-bottom border-light p-3"
+                id="response_location_time"
+              >
+                <a id="response_location_time_hour"></a>
+                <a id="response_location_time_minute"></a>
+                <a id="response_location_time_second" class="d-none"></a>
+              </dd>
 
-          <dt class="col-sm-5 lead fs-3 p-0">Viento (km/h):</dt>
-          <dd
-            class="col-sm-7 lead fs-5 border py-4"
-            id="response_location_wind_kph"
-          ></dd>
+              <dt class="col-6 lead fs-4 p-0 mb-1">City:</dt>
+              <dd
+                class="col-12 lead fs-5 border-bottom border-light p-3"
+                id="response_location_name"
+              ></dd>
 
-          <dt class="col-sm-5 lead fs-3 p-0">Direccion del viento:</dt>
-          <dd
-            class="col-sm-7 lead fs-5 border py-4"
-            id="response_location_wind_dir"
-          ></dd>
+              <dt class="col-6 lead fs-4 p-0 mb-1">Region:</dt>
+              <dd
+                class="col-12 lead fs-5 border-bottom border-light p-3"
+                id="response_location_region"
+              ></dd>
 
-          <dt class="col-sm-5 lead fs-3 p-0">Humedad (%):</dt>
-          <dd
-            class="col-sm-7 lead fs-5 border py-4"
-            id="response_location_humidity"
-          ></dd>
+              <dt class="lead fs-4 p-0 mb-1">Region ID:</dt>
+              <dd
+                class="lead fs-5 border-bottom border-light p-3"
+                id="response_location_tz_id"
+              ></dd>
+            </div>
 
-          <dt class="col-sm-5 lead fs-3 p-0">Temperatura (°C):</dt>
-          <dd
-            class="col-sm-7 lead fs-5 border py-4"
-            id="response_location_temp"
-          ></dd>
+            <!-- Segunda columna de datos -->
 
-          <dt class="col-sm-5 lead fs-3 p-0">Condición climatica:</dt>
-          <dd
-            class="col-sm-7 lead fs-5 border py-4"
-            id="dd_response_condition_text"
-          >
-            <div id="response_condition_text"></div>
-            <img id="response_condition_icon" src="" alt="" />
-          </dd>
-        </dl>
-        <div class="col-12 col-md-6">
-          <iframe
-            id="city_geolocation"
-            class="col-12 col-md-12"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-            src="https://maps.google.com/maps?q='+YOUR_LAT+','+YOUR_LON+'&hl=es&z=14&amp;output=embed"
-          ></iframe>
+            <div class="col-12 col-lg-6">
+              <dt class="lead fs-4 p-0 mb-1">Wind (KM/H):</dt>
+              <dd
+                class="lead fs-5 border-bottom border-light p-3"
+                id="response_location_wind_kph"
+              ></dd>
+
+              <dt class="lead fs-4 p-0 mb-1">Wind direction:</dt>
+              <dd
+                class="lead fs-5 border-bottom border-light p-3"
+                id="response_location_wind_dir"
+              ></dd>
+
+              <dt class="lead fs-4 p-0 mb-1">Humidity (%):</dt>
+              <dd
+                class="lead fs-5 border-bottom border-light p-3"
+                id="response_location_humidity"
+              ></dd>
+
+              <dt class="lead fs-4 p-0 mb-1">Temperature (°C):</dt>
+              <dd
+                class="lead fs-5 border-bottom border-light p-3"
+                id="response_location_temp"
+              ></dd>
+            </div>
+          </dl>
+          <div class="col-12 mx-auto">
+            <iframe
+              id="city_geolocation"
+              class="col-12 rounded-0 mb-4 mb-md-5"
+              frameborder="0"
+              scrolling="no"
+              marginheight="0"
+              marginwidth="0"
+              src="https://maps.google.com/maps?q='+YOUR_LAT+','+YOUR_LON+'&hl=es&z=14&amp;output=embed"
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
 
     <footer class="py-5 bg-dark shadow-lg">
-      <h1 class="text-light text-center">Footer</h1>
+      <ul class="d-flex justify-content-center gap-5 mt-3">
+        <li>
+          <a target="_blank" href="https://www.linkedin.com/in/erosdgc/">
+            <i class="footer-icon fa-brands fa-linkedin-in"></i>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="https://github.com/erosdgc">
+            <i class="footer-icon fa-brands fa-github"></i>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="#cornholio">
+            <i class="footer-icon fa-solid fa-suitcase"></i>
+          </a>
+        </li>
+      </ul>
+
+      <div class="footer-text-container mt-4 col-8 text-center mx-auto">
+        <p class="lead footer-text text-light text-center">
+          Weather API Project by Eros David Gomez Centofanti
+        </p>
+        <p class="lead text-light footer-text">
+          Credits:
+          <a
+            target="”_blank”"
+            href="https://www.weatherapi.com/"
+            class="lead text-light footer-text"
+            >Weather API</a
+          >
+        </p>
+      </div>
     </footer>
+
+    <script src="./api/credentials.js"></script>
+    <script src="./api/api.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
   </body>
-  <script src="./api/credentials.js"></script>
-  <script src="./api/api.js"></script>
 </html>

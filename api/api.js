@@ -1,12 +1,12 @@
 function getData() {
     city = document.getElementById('city_name').value;
     if (city){
-        var request = new XMLHttpRequest()
+        let request = new XMLHttpRequest()
 
-        request.open('GET', `${api_url}current.json?key=${api_key}&q=${city}&aqi=no&lang=es`)
+        request.open('GET', `${api_url}current.json?key=${api_key}&q=${city}&aqi=no&lang=en`)
 
         request.onload = function () {
-            var data = JSON.parse(this.response)
+            let data = JSON.parse(this.response)
             console.log(data)
             if (request.status === 200) {
                 set_data_to_div(data);
@@ -24,7 +24,7 @@ function set_data_to_div(data) {
     clean_error_div()
     clearTimeout(inicializarReloj)
     location_name = data.location.name;
-    var location_time = data.location.localtime;
+    let location_time = data.location.localtime;
     inicializarReloj(location_time);
     location_region = data.location.region;
     location_tz_id = data.location.tz_id;
@@ -49,9 +49,9 @@ function set_data_to_div(data) {
 }
 
 function get_icon_name(icon_url, time) {
-    var date_time = new Date(time)
-    var hour = date_time.getHours()
-    var time_text = (hour > 7 && hour < 20) ? "day" : "night" 
+    let date_time = new Date(time)
+    let hour = date_time.getHours()
+    let time_text = (hour > 7 && hour < 20) ? "day" : "night" 
 
     //icon_url = cdn.weatherapi.com/weather/64x64/night/113.png
     icon = `icons/${time_text}/${icon_url.slice(-7)}`
@@ -84,7 +84,7 @@ function set_seconds(){
 }
 
 function show_error(code,message) {
-    error_message = (code === 1006) ? "Ciudad no encontrada." : message
+    error_message = (code === 1006) ? "City not found" : message
     document.getElementById('error_div').innerHTML = error_message;
 }
 
